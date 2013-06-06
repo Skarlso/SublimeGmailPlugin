@@ -7,19 +7,23 @@ Hello everybody. I long wanted to add a feature to Sublime Text 2 to send a sele
 
 So I finally got around doing just that. 
 
-Installing the plugin
+*Requirement*
+
+A Python framework 2.x. I did not test it yet on Python 3.x.
+
+*Installing the plugin*
 
 Installing the plugin is really easy. Just copy it to the User folder of the packages directory. You can open it up with Sublime -> Preferences -> Browse Packages. And search the folder named User. 
 
 Copy both files in there and edit the gmail.py to contain your gmail address and password. 
 
-Usage
+*Usage*
 
 Usage is even more simple. Just select a text you would like to send and press <ctrl+alt+g> ( currently ). A small input panel will open at the bottom. Type in the email address to send the selected text to and press <ENTER>.
 
 You should see a success message in the status bar with the email address populated. 
 
-Troubleshooting
+*Troubleshooting*
 
 There shouldn't be any... :)
 

@@ -29,5 +29,11 @@ There shouldn't be any... :)
 
 If yes, please inform me. 
 
+*UPDATE*
+
+I added debug information. Now, in case of a failure, it will print out what the failure was.
+
+Also, tested it with Sublime 3, works well; and did a little bit of formatting and renaming.
+
 Thanks!
 Gergely.

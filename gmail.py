@@ -1,4 +1,8 @@
-import sublime, sublime_plugin, smtplib
+import sublime
+import sublime_plugin
+import smtplib
+import sys
+
 
 class GmailCommand(sublime_plugin.TextCommand):
     to = "example@gmail.com"
@@ -8,29 +12,32 @@ class GmailCommand(sublime_plugin.TextCommand):
         self.send_gmail(user_input, text)
 
     def send_gmail(self, to, text):
-        gmail_user = "your@gmail.com"
-        gmail_pwd = "yourpassword"
-        FROM = 'your@gmail.com'
-        TO = ['%s' % to] # from input
-        SUBJECT = "Sent from sublime text"
-        TEXT = text
+        gmail_user = "gmail_user"
+        gmail_pwd = "gmail_pwd"
+        g_from = 'g_from'
+        g_to = ['%s' % to]  # from input
+        g_to = "Sent from sublime text"
+        g_text = text
 
         message = """\From: %s\nTo: %s\nSubject: %s\n\n%s
-            """ % (FROM, ", ".join(TO), SUBJECT, TEXT)
+            """ % (g_from, ", ".join(g_to), g_to, g_text)
 
         try:
-            #server = smtplib.SMTP(SERVER)
-            server = smtplib.SMTP("smtp.gmail.com", 587) #or port 465 doesn't seem to work!
+            # server = smtplib.SMTP(SERVER)
+            # or port 465 doesn't seem to work!
+            server = smtplib.SMTP("smtp.gmail.com", 587)
             server.ehlo()
             server.starttls()
             server.login(gmail_user, gmail_pwd)
-            server.sendmail(FROM, TO, message)
-            #server.quit()
+            server.sendmail(g_from, g_to, message)
+            # server.quit()
             server.close()
             sublime.status_message("Email sent successfully to: %s" % to)
-        except:
-            sublime.status_message("There was an error sending the email to: %s " % to)
 
+        except:
+            sublime.status_message(
+                "There was an error sending the email to: %s " %
+                sys.exc_info()[0])
 
     def run(self, edit):
         global text
@@ -39,4 +46,5 @@ class GmailCommand(sublime_plugin.TextCommand):
             if not region.empty():
                 # Get the selected text
                 text = self.view.substr(region)
-                self.view.window().show_input_panel("To:", 'email@gmail.com', self.on_done, None, None)
+                self.view.window().show_input_panel(
+                    "To:", 'email@gmail.com', self.on_done, None, None)

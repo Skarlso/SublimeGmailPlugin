@@ -16,11 +16,11 @@ class GmailCommand(sublime_plugin.TextCommand):
         gmail_pwd = "gmail_pwd"
         g_from = 'g_from'
         g_to = ['%s' % to]  # from input
-        g_to = "Sent from sublime text"
+        g_sign = "Sent from sublime text"
         g_text = text
 
         message = """\From: %s\nTo: %s\nSubject: %s\n\n%s
-            """ % (g_from, ", ".join(g_to), g_to, g_text)
+            """ % (g_from, ", ".join(g_to), g_sign, g_text)
 
         try:
             # server = smtplib.SMTP(SERVER)
@@ -29,7 +29,7 @@ class GmailCommand(sublime_plugin.TextCommand):
             server.ehlo()
             server.starttls()
             server.login(gmail_user, gmail_pwd)
-            server.sendmail(g_from, g_to, message)
+            server.sendmail(g_from, g_to, message.encode('utf8'))
             # server.quit()
             server.close()
             sublime.status_message("Email sent successfully to: %s" % to)
